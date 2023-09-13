@@ -19,4 +19,28 @@ public class Minion {
                 ", numberOfEyes=" + numberOfEyes +
                 '}';
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public Integer getNumberOfEyes() {
+        return numberOfEyes;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public void setNumberOfEyes(Integer numberOfEyes) {
+        this.numberOfEyes = numberOfEyes;
+    }
 }
