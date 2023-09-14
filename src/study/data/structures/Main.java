@@ -22,19 +22,19 @@ public class Main {
 
 
 
-        bidirectionalList.addFirst(minion1);
-        bidirectionalList.addFirst(minion2);
+//        bidirectionalList.addFirst(minion1);
+//        bidirectionalList.addFirst(minion2);
         bidirectionalList.addFirst(minion3);
         bidirectionalList.addFirst(minion4);
 
         bidirectionalList.printAll();
 
-        System.out.println(bidirectionalList.findByParameter("Tim"));
-        System.out.println(bidirectionalList.removeByParameter("Steve"));
-        System.out.println(bidirectionalList.removeByParameter("Tim"));
+//        System.out.println(bidirectionalList.findByParameter("Tim"));
+//        System.out.println(bidirectionalList.removeByParameter("Steve"));
+//        System.out.println(bidirectionalList.removeByParameter("Tim"));
         System.out.println(bidirectionalList.removeByParameter("Nick"));
-        System.out.println(bidirectionalList.removeByParameter("Ally"));
-
+//        System.out.println(bidirectionalList.removeByParameter("Ally"));
+        bidirectionalList.deleteAll();
 
         bidirectionalList.printAll();
     }

@@ -5,7 +5,7 @@ import java.util.function.Function;
 public class BidirectionalList<T, ID> {
     Node<T> head;
     Node<T> tail;
-    private Function<T, ID> idExtractor;
+    private final Function<T, ID> idExtractor;
 
     public BidirectionalList(Function<T, ID> idExtractor) {
         this.idExtractor = idExtractor;
@@ -73,18 +73,31 @@ public class BidirectionalList<T, ID> {
             return last;
         }
     }
-//    public void deleteAll(){
-//        Node<T> temp = head;
-//        while (!isEmpty()){
-//
-//        }
-//    }
+
+    public void deleteAll() {
+        Node<T> temp = head;
+        while (!isEmpty()) {
+            if (temp.getPrevious() != null) {
+                Node<T> box = null;
+                box = temp.getPrevious();
+
+                temp.setPrevious(null);
+                temp = box;
+            } else {
+                temp = null;
+                break;
+            }
+        }
+        head = null;
+        tail = null;
+    }
+
 
 
     public void printAll() {
-        if (isEmpty()){
+        if (isEmpty()) {
             System.out.println("Your BidirectionalList is empty!");
-        } else{
+        } else {
             Node<T> temp = head;
             while (!(temp.getPrevious() == null)) {
                 System.out.printf("%s;", temp);
@@ -112,9 +125,7 @@ public class BidirectionalList<T, ID> {
         while (temp != null) {
             if (idExtractor.apply(temp.getData()).equals(data)) {
                 Node<T> nextNode = temp.getNext();
-//                System.out.println("следущая нода" + nextNode.getData());
                 Node<T> previousNode = temp.getPrevious();
-//                System.out.println("предущая нода" + previousNode.getData());
 
                 if (nextNode != null) {
                     nextNode.setPrevious(previousNode);
