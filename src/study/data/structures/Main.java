@@ -7,9 +7,8 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-//        List<Integer> integers = new ArrayList<>();
-        BidirectionalList<Minion> bidirectionalList = new BidirectionalList<>();
+    public static void main(String[] args) {
+        BidirectionalList<Minion, String> bidirectionalList = new BidirectionalList<>(Minion::getName);
         Minion minion1 = new Minion("Steve", 5 , 1);
         Minion minion2 = new Minion("Ally", 7 , 2);
         Minion minion3 = new Minion("Nick", 14 , 1);
@@ -28,8 +27,15 @@ public class Main {
         bidirectionalList.addFirst(minion3);
         bidirectionalList.addFirst(minion4);
 
-//        bidirectionalList.printAll();
+        bidirectionalList.printAll();
 
-        System.out.println(bidirectionalList.findByParameter("name", "Steve"));
+        System.out.println(bidirectionalList.findByParameter("Tim"));
+        System.out.println(bidirectionalList.removeByParameter("Steve"));
+        System.out.println(bidirectionalList.removeByParameter("Tim"));
+        System.out.println(bidirectionalList.removeByParameter("Nick"));
+        System.out.println(bidirectionalList.removeByParameter("Ally"));
+
+
+        bidirectionalList.printAll();
     }
 }

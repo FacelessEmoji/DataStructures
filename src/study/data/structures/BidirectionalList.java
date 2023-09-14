@@ -1,13 +1,14 @@
 package study.data.structures;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.function.Function;
 
-public class BidirectionalList<T> {
-    Node head;
-    Node tail;
+public class BidirectionalList<T, ID> {
+    Node<T> head;
+    Node<T> tail;
+    private Function<T, ID> idExtractor;
 
-    public BidirectionalList() {
+    public BidirectionalList(Function<T, ID> idExtractor) {
+        this.idExtractor = idExtractor;
         this.head = null;
         this.tail = null;
     }
@@ -17,8 +18,8 @@ public class BidirectionalList<T> {
         return this.head == null && this.tail == null;
     }
 
-    public Node addFirst(T data) {
-        Node first = new Node(data);
+    public Node<T> addFirst(T data) {
+        Node<T> first = new Node<T>(data);
         if (isEmpty()) {
             tail = first;
         } else {
@@ -29,8 +30,8 @@ public class BidirectionalList<T> {
         return head;
     }
 
-    public Node addLast(T data) {
-        Node last = new Node(data);
+    public Node<T> addLast(T data) {
+        Node<T> last = new Node<T>(data);
         if (isEmpty()) {
             head = last;
         } else {
@@ -41,11 +42,11 @@ public class BidirectionalList<T> {
         return last;
     }
 
-    public Node removeFirst() {
+    public Node<T> removeFirst() {
         if (isEmpty()) {
             return null;
         } else {
-            Node first = head;
+            Node<T> first = head;
             if (this.head.equals(this.tail)) {
                 head = null;
                 tail = null;
@@ -57,11 +58,11 @@ public class BidirectionalList<T> {
         }
     }
 
-    public Node removeLast() {
+    public Node<T> removeLast() {
         if (isEmpty()) {
             return null;
         } else {
-            Node last = tail;
+            Node<T> last = tail;
             if (this.head.equals(this.tail)) {
                 head = null;
                 tail = null;
@@ -72,33 +73,89 @@ public class BidirectionalList<T> {
             return last;
         }
     }
+//    public void deleteAll(){
+//        Node<T> temp = head;
+//        while (!isEmpty()){
+//
+//        }
+//    }
+
 
     public void printAll() {
-        Node temp = head;
-        while (!(temp.getPrevious() == null)) {
-            System.out.printf("%s;", temp);
-            temp = temp.getPrevious();
-        }
-        System.out.printf("%s; ", temp);
-    }
-
-    public <T extends Comparable<? super T>> Node findByParameter(String parameter, T data)
-            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        if (isEmpty()) {
-            return null;
-        } else {
-            String methodName = "get" + parameter.substring(0, 1).toUpperCase() + parameter.substring(1);
-            Method method = head.getData().getClass().getMethod(methodName);
-            Node temp = head;
-            while (temp != null) {
-                if (method.invoke(temp.getData()).equals(data)) {
-                    return temp;
-                } else {
-                    temp = temp.getPrevious();
-                }
+        if (isEmpty()){
+            System.out.println("Your BidirectionalList is empty!");
+        } else{
+            Node<T> temp = head;
+            while (!(temp.getPrevious() == null)) {
+                System.out.printf("%s;", temp);
+                temp = temp.getPrevious();
             }
-            return null;
+            System.out.printf("%s\n", temp);
         }
     }
 
+
+    public Node<T> findByParameter(ID data) {
+        Node<T> temp = head;
+        while (temp != null) {
+            if (idExtractor.apply(temp.getData()).equals(data)) {
+                return temp;
+            } else {
+                temp = temp.getPrevious();
+            }
+        }
+        return null;
+    }
+
+    public Node<T> removeByParameter(ID data) {
+        Node<T> temp = head;
+        while (temp != null) {
+            if (idExtractor.apply(temp.getData()).equals(data)) {
+                Node<T> nextNode = temp.getNext();
+//                System.out.println("следущая нода" + nextNode.getData());
+                Node<T> previousNode = temp.getPrevious();
+//                System.out.println("предущая нода" + previousNode.getData());
+
+                if (nextNode != null) {
+                    nextNode.setPrevious(previousNode);
+                } else {
+                    head = previousNode;
+                }
+
+                if (previousNode != null) {
+                    previousNode.setNext(nextNode);
+                } else {
+                    tail = nextNode;
+                }
+
+                // Обнуление ссылок удаляемого узла
+                temp.setNext(null);
+                temp.setPrevious(null);
+
+                return temp;
+            }
+            temp = temp.getPrevious(); // Используйте getNext вместо getPrevious для прохода по списку в прямом направлении
+        }
+        return null;
+    }
+
+
+//    public <T extends Comparable<? super T>> Node findByParameter(String parameter, T data)
+//            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+//        if (isEmpty()) {
+//            return null;
+//        } else {
+//            String methodName = "get" + parameter.substring(0, 1).toUpperCase() + parameter.substring(1);
+//            Method method = head.getData().getClass().getMethod(methodName);
+//            Node temp = head;
+//            while (temp != null) {
+//                if (method.invoke(temp.getData()).equals(data)) {
+//                    return temp;
+//                } else {
+//                    temp = temp.getPrevious();
+//                }
+//            }
+//            return null;
+//        }
+//    }
 }
