@@ -14,7 +14,6 @@ public class BidirectionalList<T, ID> {
     }
 
     private boolean isEmpty() {
-        //заглушка
         return this.head == null && this.tail == null;
     }
 
@@ -139,34 +138,13 @@ public class BidirectionalList<T, ID> {
                     tail = nextNode;
                 }
 
-                // Обнуление ссылок удаляемого узла
                 temp.setNext(null);
                 temp.setPrevious(null);
 
                 return temp;
             }
-            temp = temp.getPrevious(); // Используйте getNext вместо getPrevious для прохода по списку в прямом направлении
+            temp = temp.getPrevious();
         }
         return null;
     }
-
-
-//    public <T extends Comparable<? super T>> Node findByParameter(String parameter, T data)
-//            throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-//        if (isEmpty()) {
-//            return null;
-//        } else {
-//            String methodName = "get" + parameter.substring(0, 1).toUpperCase() + parameter.substring(1);
-//            Method method = head.getData().getClass().getMethod(methodName);
-//            Node temp = head;
-//            while (temp != null) {
-//                if (method.invoke(temp.getData()).equals(data)) {
-//                    return temp;
-//                } else {
-//                    temp = temp.getPrevious();
-//                }
-//            }
-//            return null;
-//        }
-//    }
 }
