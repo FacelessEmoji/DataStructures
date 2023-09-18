@@ -119,6 +119,19 @@ public class BidirectionalList<T, ID> {
         return null;
     }
 
+    public Node<T> changeByParameter(ID data, T newData) {
+        Node<T> temp = head;
+        while (temp != null) {
+            if (idExtractor.apply(temp.getData()).equals(data)) {
+                temp.setData(newData);
+                return temp;
+            } else {
+                temp = temp.getPrevious();
+            }
+        }
+        return null;
+    }
+
     public Node<T> removeByParameter(ID data) {
         Node<T> temp = head;
         while (temp != null) {

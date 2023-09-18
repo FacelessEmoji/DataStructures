@@ -8,39 +8,47 @@ public class Main {
         Minion minion2 = new Minion("Ally", 7 , 2);
         Minion minion3 = new Minion("Nick", 14 , 1);
         Minion minion4 = new Minion("Tim", 1 , 17);
+        Minion minion5 = new Minion("Tim2", 1 , 17);
 
-        System.out.println(bidirectionalList.addLast(minion1));
-        System.out.println(bidirectionalList.addLast(minion2));
 
+        System.out.printf("Добавим элемент в конец списка: %s",bidirectionalList.addLast(minion1));
+        System.out.print("Выведем список:");
+        bidirectionalList.printAll();
+        System.out.printf("Добавим еще элемент в конец списка: %s", bidirectionalList.addLast(minion1));
+        System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
-        System.out.println(bidirectionalList.addFirst(minion3));
-        System.out.println(bidirectionalList.addFirst(minion4));
-
+        System.out.printf("Добавим элемент в начало списка: %s",bidirectionalList.addLast(minion1));
+        System.out.print("Выведем список:");
+        bidirectionalList.printAll();
+        System.out.printf("Добавим еще элемент в начало списка: %s", bidirectionalList.addLast(minion1));
+        System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
-        System.out.println(bidirectionalList.removeLast());
-        System.out.println(bidirectionalList.removeFirst());
-
+        System.out.printf("Удалим элемент из конца списка: %s",bidirectionalList.removeLast());
+        System.out.print("Выведем список:");
+        bidirectionalList.printAll();
+        System.out.printf("Удалим элемент из начала списка: %s", bidirectionalList.removeFirst());
+        System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
+        System.out.println("Очистим список.");
         bidirectionalList.deleteAll();
 
+        System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
-        System.out.println(bidirectionalList.addLast(minion1));
-        System.out.println(bidirectionalList.addLast(minion2));
-        System.out.println(bidirectionalList.addFirst(minion3));
-        System.out.println(bidirectionalList.addFirst(minion4));
+        bidirectionalList.addLast(minion1);
+        bidirectionalList.addLast(minion2);
+        bidirectionalList.addLast(minion3);
+        bidirectionalList.addLast(minion4);
 
-        System.out.println(bidirectionalList.findByParameter("Tim"));
-        System.out.println(bidirectionalList.removeByParameter("Steve"));
-        System.out.println(bidirectionalList.removeByParameter("Tim"));
-        System.out.println(bidirectionalList.removeByParameter("Nick"));
-        System.out.println(bidirectionalList.removeByParameter("Ally"));
-
-        bidirectionalList.deleteAll();
-
+        System.out.printf("Найдем объект c полем name равным Tim: %s\n", bidirectionalList.findByParameter("Tim"));
+        System.out.printf("Заменим Tim на Tim2: %s\n", bidirectionalList.changeByParameter("Tim", minion5));
+        System.out.printf("Выведем список:");
+        bidirectionalList.printAll();
+        System.out.printf("Удалим объект с name Steve: %s\n", bidirectionalList.removeByParameter("Steve"));
+        System.out.print("Выведем список:");
         bidirectionalList.printAll();
     }
 }
