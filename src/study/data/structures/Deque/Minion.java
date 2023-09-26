@@ -1,4 +1,4 @@
-package study.data.structures;
+package study.data.structures.Deque;
 
 public class Minion {
     public String name;

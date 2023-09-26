@@ -1,4 +1,4 @@
-package study.data.structures;
+package study.data.structures.Deque;
 
 public class Main {
 
@@ -11,24 +11,24 @@ public class Main {
         Minion minion5 = new Minion("Tim2", 1 , 17);
 
 
-        System.out.printf("Добавим элемент в конец списка: %s",bidirectionalList.addLast(minion1));
+        System.out.printf("Добавим элемент в конец списка: %s\n",bidirectionalList.addLast(minion1));
         System.out.print("Выведем список:");
         bidirectionalList.printAll();
-        System.out.printf("Добавим еще элемент в конец списка: %s", bidirectionalList.addLast(minion1));
-        System.out.print("Выведем список:");
-        bidirectionalList.printAll();
-
-        System.out.printf("Добавим элемент в начало списка: %s",bidirectionalList.addLast(minion1));
-        System.out.print("Выведем список:");
-        bidirectionalList.printAll();
-        System.out.printf("Добавим еще элемент в начало списка: %s", bidirectionalList.addLast(minion1));
+        System.out.printf("Добавим еще элемент в конец списка: %s\n", bidirectionalList.addLast(minion1));
         System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
-        System.out.printf("Удалим элемент из конца списка: %s",bidirectionalList.removeLast());
+        System.out.printf("Добавим элемент в начало списка: %s\n",bidirectionalList.addLast(minion1));
         System.out.print("Выведем список:");
         bidirectionalList.printAll();
-        System.out.printf("Удалим элемент из начала списка: %s", bidirectionalList.removeFirst());
+        System.out.printf("Добавим еще элемент в начало списка: %s\n", bidirectionalList.addLast(minion1));
+        System.out.print("Выведем список:");
+        bidirectionalList.printAll();
+
+        System.out.printf("Удалим элемент из конца списка: %s\n",bidirectionalList.removeLast());
+        System.out.print("Выведем список:");
+        bidirectionalList.printAll();
+        System.out.printf("Удалим элемент из начала списка: %s\n", bidirectionalList.removeFirst());
         System.out.print("Выведем список:");
         bidirectionalList.printAll();
 
