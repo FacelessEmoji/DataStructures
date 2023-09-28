@@ -1,5 +1,7 @@
 package study.data.structures.Deque;
 
+import study.data.structures.Minion;
+
 public class Main {
 
     public static void main(String[] args) {

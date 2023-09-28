@@ -1,8 +1,10 @@
 package study.data.structures.Deque;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 
-public class BidirectionalList<T, ID> {
+public class BidirectionalList<T, ID> implements Iterable<T>{
     Node<T> head;
     Node<T> tail;
     private final Function<T, ID> idExtractor;
@@ -160,4 +162,65 @@ public class BidirectionalList<T, ID> {
         }
         return null;
     }
+
+    //Итератор:
+    @Override
+    public Iterator<T> iterator() {
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<T> {
+        private Node<T> currentNode;
+
+        public ListIterator() {
+            currentNode = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T item = currentNode.getData();
+            currentNode = currentNode.getPrevious();
+            return item;
+        }
+    }
+
+    //Индексатор:
+    public T get(int index) {
+        Node<T> current = getNodeAt(index);
+        if (current != null) {
+            return current.getData();
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
+    public void set(int index, T value) {
+        Node<T> current = getNodeAt(index);
+        if (current != null) {
+            current.setData(value);
+        } else {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private Node<T> getNodeAt(int index) {
+        if (index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<T> current = head;
+        int i = 0;
+        while (current != null && i < index) {
+            current = current.getPrevious();
+            i++;
+        }
+        return current;
+    }
+
 }

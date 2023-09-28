@@ -1,4 +1,4 @@
-package study.data.structures.Deque;
+package study.data.structures;
 
 public class Minion {
     public String name;
@@ -30,17 +30,5 @@ public class Minion {
 
     public Integer getNumberOfEyes() {
         return numberOfEyes;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setNumberOfEyes(Integer numberOfEyes) {
-        this.numberOfEyes = numberOfEyes;
     }
 }

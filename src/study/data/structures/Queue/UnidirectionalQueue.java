@@ -1,8 +1,10 @@
 package study.data.structures.Queue;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class UnidirectionalQueue<T> {
+public class UnidirectionalQueue<T> implements Iterable<T>{
     private Object[] array;
     private int size;
     private int head;
@@ -24,12 +26,12 @@ public class UnidirectionalQueue<T> {
     }
 
     public void expand(){
-        System.out.println("Array before:");
-        Arrays.stream(array).forEach(System.out::println);
+//        System.out.println("Array before:");
+//        Arrays.stream(array).forEach(System.out::println);
 
         int newCapacity = array.length * 2;
         Object[] newArray = new Object[newCapacity];
-        System.out.println("Loop");
+//        System.out.println("Loop");
         for (int i = 0; i < size; i++) {
             System.out.println((head + i) % array.length);
             newArray[i] = array[(head + i) % array.length];
@@ -38,8 +40,8 @@ public class UnidirectionalQueue<T> {
         head = 0;
         tail = size - 1;
 
-        System.out.println("Array after:");
-        Arrays.stream(array).forEach(System.out::println);
+//        System.out.println("Array after:");
+//        Arrays.stream(array).forEach(System.out::println);
     }
 
     public void enqueue(T element) {
@@ -60,5 +62,48 @@ public class UnidirectionalQueue<T> {
         head = (head + 1) % array.length;
         size--;
         return element;
+    }
+
+    public void print() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+            return;
+        }
+        System.out.print("Your queue data: ");
+        for (int i = 0; i < size; i++) {
+            System.out.print(array[(head + i) % array.length] + " ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new QueueIterator();
+    }
+
+    private class QueueIterator implements Iterator<T> {
+        private int currentIndex;
+        private int itemsIterated;
+
+        public QueueIterator() {
+            currentIndex = head;
+            itemsIterated = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return itemsIterated < size;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T item = (T) array[currentIndex];
+            currentIndex = (currentIndex + 1) % array.length;
+            itemsIterated++;
+            return item;
+        }
     }
 }
