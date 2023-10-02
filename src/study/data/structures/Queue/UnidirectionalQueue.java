@@ -1,6 +1,6 @@
 package study.data.structures.Queue;
 
-import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -9,13 +9,17 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
     private int size;
     private int head;
     private int tail;
+    private Comparator<T> comparator;
 
-    public UnidirectionalQueue(int capacity) {
+
+    public UnidirectionalQueue(int capacity, Comparator<T> comparator) {
         this.array = new Object[capacity];
         this.size = 0;
         this.head = 0;
         this.tail = -1;
+        this.comparator = comparator;
     }
+
 
     public boolean isEmpty(){
         return size == 0;
@@ -26,22 +30,14 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
     }
 
     public void expand(){
-//        System.out.println("Array before:");
-//        Arrays.stream(array).forEach(System.out::println);
-
         int newCapacity = array.length * 2;
         Object[] newArray = new Object[newCapacity];
-//        System.out.println("Loop");
         for (int i = 0; i < size; i++) {
-            System.out.println((head + i) % array.length);
             newArray[i] = array[(head + i) % array.length];
         }
         array = newArray;
         head = 0;
         tail = size - 1;
-
-//        System.out.println("Array after:");
-//        Arrays.stream(array).forEach(System.out::println);
     }
 
     public void enqueue(T element) {
@@ -75,7 +71,7 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
         }
         System.out.println();
     }
-
+    //Итератор
     @Override
     public Iterator<T> iterator() {
         return new QueueIterator();
@@ -106,4 +102,15 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
             return item;
         }
     }
+    //Компаратор
+    public int compare(T first, T second) {
+        if (comparator != null) {
+            return comparator.compare(first, second);
+        }
+        if (first instanceof Comparable<?>) {
+            return ((Comparable<T>) first).compareTo(second);
+        }
+        throw new IllegalArgumentException("No comparator provided, and items are not comparable.");
+    }
+
 }

@@ -1,6 +1,6 @@
 package study.data.structures;
 
-public class Minion {
+public class Minion implements Comparable<Minion> {
     public String name;
     public Integer age;
     public Integer numberOfEyes;
@@ -30,5 +30,16 @@ public class Minion {
 
     public Integer getNumberOfEyes() {
         return numberOfEyes;
+    }
+
+    @Override
+    public int compareTo(Minion other) {
+        int eyesComparison = Integer.compare(this.numberOfEyes, other.getNumberOfEyes());
+        int ageComparison = Integer.compare(this.age, other.getAge());
+        if (eyesComparison != 0) {
+            return eyesComparison;
+        } else if (ageComparison != 0) {
+            return ageComparison;
+        } else return Integer.compare(0, this.getName().compareTo(other.getName()));
     }
 }

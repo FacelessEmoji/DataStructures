@@ -1,18 +1,21 @@
 package study.data.structures.Deque;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.function.Function;
 
-public class BidirectionalList<T, ID> implements Iterable<T>{
+public class BidirectionalList<T, ID> implements Iterable<T> {
     Node<T> head;
     Node<T> tail;
     private final Function<T, ID> idExtractor;
+    private Comparator<T> comparator;
 
-    public BidirectionalList(Function<T, ID> idExtractor) {
+    public BidirectionalList(Function<T, ID> idExtractor, Comparator<T> comparator) {
         this.idExtractor = idExtractor;
         this.head = null;
         this.tail = null;
+        this.comparator = comparator;
     }
 
     private boolean isEmpty() {
@@ -92,7 +95,6 @@ public class BidirectionalList<T, ID> implements Iterable<T>{
         head = null;
         tail = null;
     }
-
 
 
     public void printAll() {
@@ -223,4 +225,13 @@ public class BidirectionalList<T, ID> implements Iterable<T>{
         return current;
     }
 
+    public int compare(T first, T second) {
+        if (comparator != null) {
+            return comparator.compare(first, second);
+        }
+        if (first instanceof Comparable<?>) {
+            return ((Comparable<T>) first).compareTo(second);
+        }
+        throw new IllegalArgumentException("No comparator provided, and items are not comparable.");
+    }
 }
