@@ -71,6 +71,7 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
         }
         System.out.println();
     }
+
     //Итератор
     @Override
     public Iterator<T> iterator() {
@@ -102,6 +103,7 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
             return item;
         }
     }
+
     //Компаратор
     public int compare(T first, T second) {
         if (comparator != null) {
@@ -112,5 +114,4 @@ public class UnidirectionalQueue<T> implements Iterable<T>{
         }
         throw new IllegalArgumentException("No comparator provided, and items are not comparable.");
     }
-
 }
