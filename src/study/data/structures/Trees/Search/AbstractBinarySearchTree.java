@@ -26,5 +26,6 @@ public interface AbstractBinarySearchTree<E extends Comparable<E>> {
 
                 public Node() {
                 }
+
         }
 }

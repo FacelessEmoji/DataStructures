@@ -1,5 +1,7 @@
 package study.data.structures.Trees.Search;
 
+import java.util.Arrays;
+
 public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinarySearchTree<E> {
     public static class Node<E> extends AbstractBinarySearchTree.Node<E> {
         public E value;
@@ -107,11 +109,68 @@ public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinary
         return null;
     }
 
+    public String asTree() {
+        // Вычисляем высоту дерева
+        int height = getHeight(root);
+
+        // Вычисляем ширину матрицы
+        int width = (int) Math.pow(2, height + 1) - 1;
+
+        // Создаем матрицу для хранения элементов
+        String[][] matrix = new String[height][width];
+
+        // Заполняем матрицу пустыми строками
+        for (String[] row : matrix) {
+            Arrays.fill(row, " ");
+        }
+
+        // Заполняем матрицу значениями из дерева
+        fillMatrix(root, matrix, 0, 0, width / 2);
+
+        // Собираем матрицу в виде строки
+        StringBuilder result = new StringBuilder();
+        for (String[] row : matrix) {
+            for (String cell : row) {
+                result.append(cell);
+            }
+            result.append("\n");
+        }
+
+        return result.toString();
+    }
+
+    private void fillMatrix(Node<E> node, String[][] matrix, int row, int left, int right) {
+        if (node == null) {
+            return;
+        }
+
+        // Находим середину между left и right
+        int mid = (left + right) / 2;
+
+        // Заполняем текущую ячейку матрицы значением из узла
+        matrix[row][mid] = node.value.toString();
+
+        // Рекурсивно заполняем левое и правое поддерево
+        fillMatrix(node.leftChild, matrix, row + 1, left, mid - 1);
+        fillMatrix(node.rightChild, matrix, row + 1, mid + 1, right);
+    }
+
+    private int getHeight(Node<E> node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftHeight = getHeight(node.leftChild);
+        int rightHeight = getHeight(node.rightChild);
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+
+
     public void morrisTraversalInorder() {
         Node<E> current = root;
         while (current != null) {
             if (current.leftChild == null) {
-                System.out.println(current.value);
+                System.out.print(current.value + " ");
                 current = current.rightChild;
             } else {
                 Node<E> pre = current.leftChild;
@@ -123,7 +182,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements AbstractBinary
                     current = current.leftChild;
                 } else {
                     pre.rightChild = null;
-                    System.out.println(current.value);
+                    System.out.print(current.value + " ");
                     current = current.rightChild;
                 }
             }
