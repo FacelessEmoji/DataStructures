@@ -20,7 +20,8 @@ public class Main {
         Integer minion7 = 7;
         Integer minion8 = 10;
         Integer minion9 = 9;
-        Integer minion10 = 69;
+        Integer minion10 = 11;
+
 
 //        Minion minion1 = new Minion("Bob", 30, 2);
 //        Minion minion2 = new Minion("Kevin", 25, 1);
@@ -62,9 +63,10 @@ public class Main {
         System.out.println("\nDFS:");
         root.depthFirst().forEach(System.out::print);
 
+        // Создаем и заполняем дерево поиска
+
         System.out.println("\nBinary Search Tree:");
 
-        // Создаем и заполняем дерево поиска
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         bst.insert(minion1);
         bst.insert(minion2);
@@ -75,6 +77,7 @@ public class Main {
         bst.insert(minion7);
         bst.insert(minion8);
         bst.insert(minion9);
+        bst.insert(minion10);
 
         System.out.println(bst.asTree());
         // Проверка наличия элемента

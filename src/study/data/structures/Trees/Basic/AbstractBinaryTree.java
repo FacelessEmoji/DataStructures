@@ -14,6 +14,6 @@ public interface AbstractBinaryTree<E> {
         List<AbstractBinaryTree<E>> postOrder();
         void forEachInOrder(Consumer<E> consumer);
         //
-        List<AbstractBinaryTree<E>> depthFirst();  // обход в глубину
-        List<AbstractBinaryTree<E>> breadthFirst();        // Обход в ширину
+        List<AbstractBinaryTree<E>> depthFirst();       // обход в глубину
+        List<AbstractBinaryTree<E>> breadthFirst();     // Обход в ширину
         }
