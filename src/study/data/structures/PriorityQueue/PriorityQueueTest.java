@@ -8,10 +8,10 @@ public class PriorityQueueTest {
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
 
         // Тестирование добавления элементов
-        ArrayList<Integer> test = new ArrayList<>(Arrays.asList(17, 15, 9, 5, 8, 16, 6));
+        ArrayList<Integer> test = new ArrayList<>(Arrays.asList(17, 15,6, 9, 5, 8, 16, 6));
         for (Integer integer : test) {
             priorityQueue.add(integer);
-            System.out.println("Очередь как дерево после добавления:\n" + priorityQueue.asTree());
+            System.out.println("Очередь как дерево после добавления:\n" + priorityQueue);
         }
 
         // Тестирование size()
@@ -22,7 +22,13 @@ public class PriorityQueueTest {
 
         // Тестирование poll()
         System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
-        System.out.println("Очередь как дерево после poll:\n" + priorityQueue.asTree());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
+        System.out.println("Очередь как дерево после poll:\n" + priorityQueue);
 
         // Повторное тестирование size()
         System.out.println("Размер очереди после удаления: " + priorityQueue.size());

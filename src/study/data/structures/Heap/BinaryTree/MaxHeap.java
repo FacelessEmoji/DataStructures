@@ -1,15 +1,15 @@
-package study.data.structures.Heap;
+package study.data.structures.Heap.BinaryTree;
+
+import study.data.structures.Heap.Heap;
 
 import java.util.Arrays;
 
-class MaxHeap<E extends Comparable<E>> implements Heap<E> {
+public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
     private Node<E> root;
-    private Node<E> lastNode;
     private int size;
 
     public MaxHeap() {
         root = null;
-        lastNode = null;
         size = 0;
     }
 
@@ -23,7 +23,6 @@ class MaxHeap<E extends Comparable<E>> implements Heap<E> {
         Node<E> newNode = new Node<>(element);
         if (root == null) {
             root = newNode;
-            lastNode = newNode;
         } else {
             int parentIndex = (size + 1) / 2;
             Node<E> parent = getNode(parentIndex);
@@ -35,7 +34,6 @@ class MaxHeap<E extends Comparable<E>> implements Heap<E> {
                     parent.right = newNode;
                 }
             }
-            lastNode = newNode;
             heapifyUp(newNode);
         }
         size++;
@@ -71,61 +69,6 @@ class MaxHeap<E extends Comparable<E>> implements Heap<E> {
     @Override
     public E peek() {
         return root != null ? root.value : null;
-    }
-
-    @Override
-    public E poll() {
-        if (root == null) {
-            return null;
-        }
-
-        E maxValue = root.value;
-        root.value = lastNode.value;
-        deleteLastNode();
-        heapifyDown(root);
-
-        return maxValue;
-    }
-
-    private void deleteLastNode() {
-        if (size == 1) {
-            root = null;
-            lastNode = null;
-        } else {
-            Node<E> parentOfLast = getNode((size - 1) / 2);
-            if (size % 2 == 0) {
-                parentOfLast.left = null;
-            } else {
-                parentOfLast.right = null;
-            }
-            lastNode = parentOfLast;
-        }
-        size--;
-    }
-
-
-    private void heapifyDown(Node<E> node) {
-        while (node != null && !isLeaf(node)) {
-            Node<E> largerChild = largerChild(node);
-            if (largerChild.value.compareTo(node.value) > 0) {
-                swap(node, largerChild);
-            }
-            node = largerChild;
-        }
-    }
-
-    private boolean isLeaf(Node<E> node) {
-        return node.left == null && node.right == null;
-    }
-
-    private Node<E> largerChild(Node<E> node) {
-        if (node.left != null && node.right != null) {
-            return node.left.value.compareTo(node.right.value) > 0 ? node.left : node.right;
-        } else if (node.left != null) {
-            return node.left;
-        } else {
-            return node.right;
-        }
     }
 
     //Служебный вывод дерева елочкой
@@ -192,6 +135,7 @@ class MaxHeap<E extends Comparable<E>> implements Heap<E> {
             printInOrder(node.right);
         }
     }
+
 }
 
 

@@ -1,4 +1,4 @@
-package study.data.structures.Heap;
+package study.data.structures.Heap.BinaryTree;
 
 class Node<E> {
     E value;
