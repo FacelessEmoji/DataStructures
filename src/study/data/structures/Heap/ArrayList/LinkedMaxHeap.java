@@ -43,6 +43,7 @@ public class LinkedMaxHeap<E extends Comparable<E>> implements Heap<E> {
         return heap.get(0);
     }
 
+    //Служебный вывод елочкой
     public String asTree() {
         int height = getHeight();
 

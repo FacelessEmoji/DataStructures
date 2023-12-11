@@ -72,6 +72,8 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
     }
 
     //Служебный вывод дерева елочкой
+
+
     public String asTree() {
         int height = getHeight(root);
 

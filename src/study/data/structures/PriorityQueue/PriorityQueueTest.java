@@ -28,7 +28,7 @@ public class PriorityQueueTest {
         System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
         System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
         System.out.println("Удаление максимального элемента (poll): " + priorityQueue.poll());
-        System.out.println("Очередь как дерево после poll:\n" + priorityQueue);
+        System.out.println("Очередь после poll:\n" + priorityQueue);
 
         // Повторное тестирование size()
         System.out.println("Размер очереди после удаления: " + priorityQueue.size());
