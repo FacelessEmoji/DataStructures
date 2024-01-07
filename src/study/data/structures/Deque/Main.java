@@ -7,13 +7,13 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        BidirectionalList<Minion, String> bidirectionalList = new BidirectionalList<>(Minion::getName, Comparator.comparing(Minion::getName));
-        Minion minion1 = new Minion("Steve", 5 , 10);
-        Minion minion2 = new Minion("Ally", 20 , 20);
-        Minion minion3 = new Minion("Nick", 20 , 20);
-        Minion minion4 = new Minion("Tim", 6 , 4);
-        Minion minion5 = new Minion("James", 7 , 5);
-        Minion minion6 = new Minion("Kate", 8 , 6);
+//        BidirectionalList<Minion, String> bidirectionalList = new BidirectionalList<>(Minion::getName, Comparator.comparing(Minion::getName));
+//        Minion minion1 = new Minion("Steve", 5 , 10);
+//        Minion minion2 = new Minion("Ally", 20 , 20);
+//        Minion minion3 = new Minion("Nick", 20 , 20);
+//        Minion minion4 = new Minion("Tim", 6 , 4);
+//        Minion minion5 = new Minion("James", 7 , 5);
+//        Minion minion6 = new Minion("Kate", 8 , 6);
 //
 //
 //        System.out.printf("Добавим элемент в конец списка: %s\n",bidirectionalList.addLast(minion1));
@@ -67,21 +67,21 @@ public class Main {
 //            System.err.println("Index is out of bounds of the list");
 //        }
 //        bidirectionalList.deleteAll();
-
-        bidirectionalList.addLast(minion1);
-        bidirectionalList.addLast(minion2);
-        bidirectionalList.addLast(minion3);
-        bidirectionalList.addLast(minion4);
-        bidirectionalList.addLast(minion5);
-        bidirectionalList.addLast(minion6);
-
-        bidirectionalList.printAll();
-
-        List<Minion> minionList = new ArrayList<>();
-        for (Minion minion: bidirectionalList) {
-            minionList.add(minion);
-        }
-        Collections.sort(minionList);
-        minionList.forEach(System.out::println);
+//
+//        bidirectionalList.addLast(minion1);
+//        bidirectionalList.addLast(minion2);
+//        bidirectionalList.addLast(minion3);
+//        bidirectionalList.addLast(minion4);
+//        bidirectionalList.addLast(minion5);
+//        bidirectionalList.addLast(minion6);
+//
+//        bidirectionalList.printAll();
+//
+//        List<Minion> minionList = new ArrayList<>();
+//        for (Minion minion: bidirectionalList) {
+//            minionList.add(minion);
+//        }
+//        Collections.sort(minionList);
+//        minionList.forEach(System.out::println);
     }
 }

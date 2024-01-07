@@ -1,5 +1,6 @@
 package study.data.structures.Hashtable;
 
+
 public class TestHashTable {
     public static void main(String[] args) {
         // Создание хеш-таблицы

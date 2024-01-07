@@ -27,19 +27,29 @@ public class HashTable<K, V> implements Iterable<KeyValue<K, V>> {
     }
 
     // Метод для добавления элемента
+    // Метод для добавления элемента
     public void add(K key, V value) {
         this.growIfNeeded();
         int slotNumber = this.findSlotNumber(key);
         LinkedList<KeyValue<K, V>> slot = this.slots[slotNumber];
+
+        // Проверяем, существует ли уже элемент с таким же ключом в слоте
         for (KeyValue<K, V> keyValue : slot) {
             if (keyValue.getKey().equals(key)) {
                 keyValue.setValue(value);
                 return;
             }
         }
+
+        // Если слот не пустой, значит произошла коллизия
+        if (!slot.isEmpty()) {
+            System.out.println("Коллизия обнаружена при добавлении ключа: " + key);
+        }
+
         slot.add(new KeyValue<>(key, value));
         this.count++;
     }
+
 
     // Метод для вычисления номера слота
     private int findSlotNumber(K key) {

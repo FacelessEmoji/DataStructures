@@ -137,7 +137,6 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
             printInOrder(node.right);
         }
     }
-
 }
 
 

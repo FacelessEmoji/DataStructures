@@ -5,4 +5,4 @@ public interface AbstractQueue <E extends Comparable <E>> {
     void add(E element);
     E peek();
     E poll();
-    }
+}

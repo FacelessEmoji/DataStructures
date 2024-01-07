@@ -3,16 +3,13 @@ package study.data.structures.Deque;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.function.Function;
 
 public class BidirectionalList<T, ID> implements Iterable<T> {
     Node<T> head;
     Node<T> tail;
-    private final Function<T, ID> idExtractor;
     private Comparator<T> comparator;
 
-    public BidirectionalList(Function<T, ID> idExtractor, Comparator<T> comparator) {
-        this.idExtractor = idExtractor;
+    public BidirectionalList( Comparator<T> comparator) {
         this.head = null;
         this.tail = null;
         this.comparator = comparator;
@@ -110,60 +107,6 @@ public class BidirectionalList<T, ID> implements Iterable<T> {
         }
     }
 
-
-    public Node<T> findByParameter(ID data) {
-        Node<T> temp = head;
-        while (temp != null) {
-            if (idExtractor.apply(temp.getData()).equals(data)) {
-                return temp;
-            } else {
-                temp = temp.getPrevious();
-            }
-        }
-        return null;
-    }
-
-    public Node<T> changeByParameter(ID data, T newData) {
-        Node<T> temp = head;
-        while (temp != null) {
-            if (idExtractor.apply(temp.getData()).equals(data)) {
-                temp.setData(newData);
-                return temp;
-            } else {
-                temp = temp.getPrevious();
-            }
-        }
-        return null;
-    }
-
-    public Node<T> removeByParameter(ID data) {
-        Node<T> temp = head;
-        while (temp != null) {
-            if (idExtractor.apply(temp.getData()).equals(data)) {
-                Node<T> nextNode = temp.getNext();
-                Node<T> previousNode = temp.getPrevious();
-
-                if (nextNode != null) {
-                    nextNode.setPrevious(previousNode);
-                } else {
-                    head = previousNode;
-                }
-
-                if (previousNode != null) {
-                    previousNode.setNext(nextNode);
-                } else {
-                    tail = nextNode;
-                }
-
-                temp.setNext(null);
-                temp.setPrevious(null);
-
-                return temp;
-            }
-            temp = temp.getPrevious();
-        }
-        return null;
-    }
 
     //Итератор:
     @Override
