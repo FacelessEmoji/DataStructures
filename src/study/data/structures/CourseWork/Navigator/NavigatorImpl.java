@@ -2,7 +2,7 @@ package study.data.structures.CourseWork.Navigator;
 
 import study.data.structures.CourseWork.CustomMap.CustomKeyValue;
 import study.data.structures.CourseWork.CustomMap.CustomMapImpl;
-import study.data.structures.CourseWork.List.CustomList;
+import study.data.structures.CourseWork.List.CustomListImpl;
 import study.data.structures.CourseWork.List.CustomNode;
 import study.data.structures.CourseWork.Route.Route;
 
@@ -58,7 +58,7 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public Iterable<Route> searchRoutes(String startPoint, String endPoint) {
-        CustomList<Route> foundRoutes = new CustomList<>();
+        CustomListImpl<Route> foundRoutes = new CustomListImpl<>();
         for (CustomKeyValue<String, Route> entry : routesMap) {
             Route route = entry.getValue();
             if (route.getLocationPoints().getFirst().equals(startPoint) && route.getLocationPoints().getLast().equals(endPoint)) {
@@ -74,7 +74,7 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public Iterable<Route> getFavoriteRoutes(String destinationPoint) {
-        CustomList<Route> favoriteRoutes = new CustomList<>();
+        CustomListImpl<Route> favoriteRoutes = new CustomListImpl<>();
         for (CustomKeyValue<String, Route> entry : routesMap) {
             Route route = entry.getValue();
             if (route.isFavorite() && route.getLocationPoints().contains(destinationPoint)) {
@@ -89,7 +89,7 @@ public class NavigatorImpl implements Navigator {
 
     @Override
     public Iterable<Route> getTop3Routes() {
-        CustomList<Route> allRoutes = new CustomList<>();
+        CustomListImpl<Route> allRoutes = new CustomListImpl<>();
         for (CustomKeyValue<String, Route> entry : routesMap) {
             allRoutes.addLast(entry.getValue());
         }
@@ -102,7 +102,7 @@ public class NavigatorImpl implements Navigator {
     }
 
 
-    private void sortCustomList(CustomList<Route> list, Comparator<Route> comparator) {
+    private void sortCustomList(CustomListImpl<Route> list, Comparator<Route> comparator) {
         if (list.head != null) {
             list.head = mergeSort(list.head, comparator);
             updateTail(list);
@@ -151,7 +151,7 @@ public class NavigatorImpl implements Navigator {
         return slow;
     }
 
-    private void updateTail(CustomList<Route> list) {
+    private void updateTail(CustomListImpl<Route> list) {
         CustomNode<Route> current = list.head;
         while (current != null && current.getNext() != null) {
             current = current.getNext();

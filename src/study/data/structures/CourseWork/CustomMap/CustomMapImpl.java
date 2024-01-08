@@ -1,14 +1,12 @@
 package study.data.structures.CourseWork.CustomMap;
 
-import study.data.structures.CourseWork.List.CustomList;
-import study.data.structures.Hashtable.KeyValue;
-
+import study.data.structures.CourseWork.List.CustomListImpl;
 import java.util.Iterator;
 
 public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyValue<K, V>> {
     private static final int INITIAL_CAPACITY = 16;
     private static final double LOAD_FACTOR = 0.80d;
-    private CustomList<CustomKeyValue<K, V>>[] slots;
+    private CustomListImpl<CustomKeyValue<K, V>>[] slots;
     private int count;
     private int capacity;
 
@@ -18,9 +16,9 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
 
     public CustomMapImpl(int capacity) {
         this.capacity = capacity;
-        this.slots = new CustomList[capacity];
+        this.slots = new CustomListImpl[capacity];
         for (int i = 0; i < capacity; i++) {
-            this.slots[i] = new CustomList<>();
+            this.slots[i] = new CustomListImpl<>();
         }
         this.count = 0;
     }
@@ -29,7 +27,7 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
     public void put(K key, V value) {
         growIfNeeded();
         int slotNumber = findSlotNumber(key);
-        CustomList<CustomKeyValue<K, V>> slot = slots[slotNumber];
+        CustomListImpl<CustomKeyValue<K, V>> slot = slots[slotNumber];
 
         for (CustomKeyValue<K, V> keyValue : slot) {
             if (keyValue.getKey().equals(key)) {
@@ -45,7 +43,7 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
     @Override
     public V get(K key) {
         int slotNumber = findSlotNumber(key);
-        CustomList<CustomKeyValue<K, V>> slot = slots[slotNumber];
+        CustomListImpl<CustomKeyValue<K, V>> slot = slots[slotNumber];
         for (CustomKeyValue<K, V> keyValue : slot) {
             if (keyValue.getKey().equals(key)) {
                 return keyValue.getValue();
@@ -62,11 +60,11 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
     @Override
     public V remove(K key) {
         int slotNumber = findSlotNumber(key);
-        CustomList<CustomKeyValue<K, V>> slot = slots[slotNumber];
+        CustomListImpl<CustomKeyValue<K, V>> slot = slots[slotNumber];
 
         for (CustomKeyValue<K, V> keyValue : slot) {
             if (keyValue.getKey().equals(key)) {
-                slot.remove(keyValue); // Предполагается, что CustomList имеет метод remove
+                slot.remove(keyValue); // Предполагается, что CustomListImpl имеет метод remove
                 count--;
                 return keyValue.getValue();
             }
@@ -89,8 +87,8 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
 
     @Override
     public Iterable<K> keys() {
-        CustomList<K> keysList = new CustomList<>();
-        for (CustomList<CustomKeyValue<K, V>> slot : slots) {
+        CustomListImpl<K> keysList = new CustomListImpl<>();
+        for (CustomListImpl<CustomKeyValue<K, V>> slot : slots) {
             for (CustomKeyValue<K, V> keyValue : slot) {
                 keysList.addLast(keyValue.getKey());
             }
@@ -100,8 +98,8 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
 
     @Override
     public Iterable<V> values() {
-        CustomList<V> valuesList = new CustomList<>();
-        for (CustomList<CustomKeyValue<K, V>> slot : slots) {
+        CustomListImpl<V> valuesList = new CustomListImpl<>();
+        for (CustomListImpl<CustomKeyValue<K, V>> slot : slots) {
             for (CustomKeyValue<K, V> keyValue : slot) {
                 valuesList.addLast(keyValue.getValue());
             }
@@ -147,7 +145,7 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
 
     private void grow() {
         CustomMapImpl<K, V> newTable = new CustomMapImpl<>(capacity * 2);
-        for (CustomList<CustomKeyValue<K, V>> slot : slots) {
+        for (CustomListImpl<CustomKeyValue<K, V>> slot : slots) {
             for (CustomKeyValue<K, V> keyValue : slot) {
                 newTable.put(keyValue.getKey(), keyValue.getValue());
             }
@@ -158,7 +156,7 @@ public class CustomMapImpl<K, V> implements CustomMap<K, V>, Iterable<CustomKeyV
 
     private CustomKeyValue<K, V> find(K key) {
         int slotNumber = findSlotNumber(key);
-        CustomList<CustomKeyValue<K, V>> slot = slots[slotNumber];
+        CustomListImpl<CustomKeyValue<K, V>> slot = slots[slotNumber];
         for (CustomKeyValue<K, V> keyValue : slot) {
             if (keyValue.getKey().equals(key)) {
                 return keyValue;

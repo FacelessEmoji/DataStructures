@@ -1,9 +1,8 @@
 package study.data.structures.CourseWork.Route;
 
-import study.data.structures.CourseWork.List.CustomList;
+import study.data.structures.CourseWork.List.CustomListImpl;
 import study.data.structures.CourseWork.List.CustomNode;
 
-import java.util.Iterator;
 import java.util.Objects;
 
 public class Route {
@@ -12,9 +11,9 @@ public class Route {
     private double distance;
     private int popularity;
     private boolean isFavorite;
-    private CustomList<String> locationPoints;
+    private CustomListImpl<String> locationPoints;
 
-    public Route(double distance, int popularity, boolean isFavorite, CustomList<String> locationPoints) {
+    public Route(double distance, int popularity, boolean isFavorite, CustomListImpl<String> locationPoints) {
         this.id = generateId();
         this.distance = distance;
         this.popularity = popularity;
@@ -23,12 +22,12 @@ public class Route {
     }
 
     // Статический метод для создания списка точек маршрута
-    public static CustomList<String> createRoutePoints(String... cities) {
+    public static CustomListImpl<String> createRoutePoints(String... cities) {
         if (cities.length < 2) {
             throw new IllegalArgumentException("A route must consist of at least two cities.");
         }
 
-        CustomList<String> locationPoints = new CustomList<>();
+        CustomListImpl<String> locationPoints = new CustomListImpl<>();
         for (String city : cities) {
             locationPoints.addLast(city);
         }
@@ -75,11 +74,11 @@ public class Route {
         isFavorite = favorite;
     }
 
-    public CustomList<String> getLocationPoints() {
+    public CustomListImpl<String> getLocationPoints() {
         return locationPoints;
     }
 
-    public void setLocationPoints(CustomList<String> locationPoints) {
+    public void setLocationPoints(CustomListImpl<String> locationPoints) {
         this.locationPoints = locationPoints;
     }
 

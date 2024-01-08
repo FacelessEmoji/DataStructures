@@ -43,5 +43,4 @@ public class CustomNode<T> {
     public String toString() {
         return data != null ? data.toString() : "null";
     }
-
 }
